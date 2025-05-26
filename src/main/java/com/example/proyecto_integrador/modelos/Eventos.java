@@ -1,5 +1,6 @@
 package com.example.proyecto_integrador.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,17 @@ public class Eventos {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column (name = "id")
     private Integer Id;
+
+    @ManyToOne
+    @JoinColumn (name = "fk_cliente", referencedColumnName = "id")
+    @JsonBackReference
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn (name = "fk_tarjeta", referencedColumnName = "id")
+    @JsonBackReference
+    private Tarjeta tarjeta;
+
     @Column(name = "numeros_personas")
     private Integer numerosPersonas;
     @Column (name = "lugar")
@@ -18,6 +30,8 @@ public class Eventos {
     private Integer platosServidos;
     @Column (name= "cosas_extras")
     private String cosasExtras;
+
+
 
     public Eventos() {
     }

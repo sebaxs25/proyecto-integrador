@@ -1,6 +1,9 @@
 package com.example.proyecto_integrador.modelos;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name = "cliente")
@@ -22,6 +25,16 @@ public class Cliente {
     private Integer segundoTelefono;
     @Column (name="direccion")
     private String Direccion;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
+    private List<Eventos> eventos;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
+    private List<Tarjeta> tarjetas;
+
+
 
     public Cliente() {
     }

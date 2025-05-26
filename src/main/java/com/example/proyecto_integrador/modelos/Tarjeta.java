@@ -1,6 +1,11 @@
 package com.example.proyecto_integrador.modelos;
 
+import com.example.proyecto_integrador.palabras.Estado;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name = "tarjeta")
@@ -10,18 +15,30 @@ public class Tarjeta {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private String Id;
-    @Column(name="numero_tarjeta")
+
+    @ManyToOne
+    @JoinColumn(name = "fk_cliente", referencedColumnName = "id")
+    @JsonBackReference
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "tarjeta")
+    @JsonManagedReference
+    private List<Eventos> eventos;
+
+
+    @Column(name = "numero_tarjeta")
     private Integer numeroTarjeta;
-    @Column (name = "confirmacion_tarjeta")
+    @Column(name = "confirmacion_tarjeta")
     private Integer confimacionTarjeta;
-    @Column (name = "estado")
-    private String estadoPago;
+    @Enumerated(EnumType.STRING)
+    private Estado estadoPago;
 
     public Tarjeta() {
     }
 
-    public Tarjeta(String id, Integer numeroTarjeta, Integer confimacionTarjeta, String estadoPago) {
+    public Tarjeta(String id, Cliente cliente, Integer numeroTarjeta, Integer confimacionTarjeta, Estado estadoPago) {
         Id = id;
+        this.cliente = cliente;
         this.numeroTarjeta = numeroTarjeta;
         this.confimacionTarjeta = confimacionTarjeta;
         this.estadoPago = estadoPago;
@@ -33,6 +50,14 @@ public class Tarjeta {
 
     public void setId(String id) {
         Id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Integer getNumeroTarjeta() {
@@ -51,11 +76,11 @@ public class Tarjeta {
         this.confimacionTarjeta = confimacionTarjeta;
     }
 
-    public String getEstadoPago() {
+    public Estado getEstadoPago() {
         return estadoPago;
     }
 
-    public void setEstadoPago(String estadoPago) {
+    public void setEstadoPago(Estado estadoPago) {
         this.estadoPago = estadoPago;
     }
 }
