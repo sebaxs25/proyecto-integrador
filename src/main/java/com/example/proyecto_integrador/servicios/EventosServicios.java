@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventosServicios {
@@ -25,4 +26,12 @@ public List<Eventos> listaEventos () throws Exception{
         throw new  Exception();
     }
 }
+    public Eventos buscarEventos (Integer id) throws Exception{
+        try{
+            Optional<Eventos>
+
+        }catch (Exception error){
+
+        }
+    }
 }
