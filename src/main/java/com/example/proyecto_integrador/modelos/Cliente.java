@@ -28,7 +28,7 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference
-    private List<Eventos> eventos;
+    private List<Evento> eventos;
 
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference

@@ -23,7 +23,7 @@ public class Tarjeta {
 
     @OneToMany(mappedBy = "tarjeta")
     @JsonManagedReference
-    private List<Eventos> eventos;
+    private List<Evento> eventos;
 
 
     @Column(name = "numero_tarjeta")

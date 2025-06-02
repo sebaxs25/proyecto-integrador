@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "eventos")
-public class Eventos {
+public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -33,10 +33,10 @@ public class Eventos {
 
 
 
-    public Eventos() {
+    public Evento() {
     }
 
-    public Eventos(Integer id, Integer numerosPersonas, String lugar, Integer platosServidos, String cosasExtras) {
+    public Evento(Integer id, Integer numerosPersonas, String lugar, Integer platosServidos, String cosasExtras) {
         Id = id;
         this.numerosPersonas = numerosPersonas;
         Lugar = lugar;
