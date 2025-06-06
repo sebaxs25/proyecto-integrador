@@ -6,54 +6,48 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table (name = "cliente")
+@Table(name ="cliente")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column (name = "id")
-    private String Id;
-    @Column (name="nombre")
-    private String Nombre;
-    @Column(name="apellido")
-    private String Apellido;
-    @Column (name = "edad")
-    private Integer Edad;
-    @Column (name = "telefono")
-    private Integer Telefono;
-    @Column (name = "segundo_telefono")
-    private Integer segundoTelefono;
-    @Column (name="direccion")
-    private String Direccion;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer Id;
     @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference
+    @JsonManagedReference(value = "cliente-eveneto")
     private List<Evento> eventos;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference
+    @JsonManagedReference(value ="cliente-tarjeta")
     private List<Tarjeta> tarjetas;
+
+    @Column (name="nombre")
+    private String Nombre;
+    @Column (name= "apellido")
+    private String Apellido;
+    @Column (name="correo")
+    private String correo;
+    @Column (name="contraseña")
+    private String contrasena;
+
 
 
 
     public Cliente() {
     }
 
-    public Cliente(String id, String nombre, String apellido, Integer edad, Integer telefono, Integer segundoTelefono, String direccion) {
+    public Cliente(Integer id, String nombre, String apellido,  String correo, String contrasena) {
         Id = id;
         Nombre = nombre;
         Apellido = apellido;
-        Edad = edad;
-        Telefono = telefono;
-        this.segundoTelefono = segundoTelefono;
-        Direccion = direccion;
+        this.correo = correo;
+        this.contrasena = contrasena;
     }
 
-    public String getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
@@ -73,35 +67,19 @@ public class Cliente {
         Apellido = apellido;
     }
 
-    public Integer getEdad() {
-        return Edad;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEdad(Integer edad) {
-        Edad = edad;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public Integer getTelefono() {
-        return Telefono;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setTelefono(Integer telefono) {
-        Telefono = telefono;
-    }
-
-    public Integer getSegundoTelefono() {
-        return segundoTelefono;
-    }
-
-    public void setSegundoTelefono(Integer segundoTelefono) {
-        this.segundoTelefono = segundoTelefono;
-    }
-
-    public String getDireccion() {
-        return Direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        Direccion = direccion;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

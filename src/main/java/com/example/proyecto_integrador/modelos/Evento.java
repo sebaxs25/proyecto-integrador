@@ -4,31 +4,26 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "eventos")
+@Table(name = "evento")
 public class Evento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column (name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
     @ManyToOne
     @JoinColumn (name = "fk_cliente", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonBackReference (value = "cliente-evento")
     private Cliente cliente;
 
     @ManyToOne
     @JoinColumn (name = "fk_tarjeta", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonBackReference (value = "tarjeta-evento")
     private Tarjeta tarjeta;
 
-    @Column(name = "numeros_personas")
     private Integer numerosPersonas;
-    @Column (name = "lugar")
     private String Lugar;
-    @Column (name = "platos_servidos")
     private Integer platosServidos;
-    @Column (name= "cosas_extras")
     private String cosasExtras;
 
 

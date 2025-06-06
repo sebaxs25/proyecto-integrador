@@ -8,56 +8,51 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table (name = "tarjeta")
+@Table(name ="tarjeta")
 public class Tarjeta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer Id;
 
     @ManyToOne
     @JoinColumn(name = "fk_cliente", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonBackReference(value = "cliente-tarjeta")
     private Cliente cliente;
 
     @OneToMany(mappedBy = "tarjeta")
-    @JsonManagedReference
+    @JsonManagedReference(value= "tarjeta-evento")
     private List<Evento> eventos;
 
 
-    @Column(name = "numero_tarjeta")
     private Integer numeroTarjeta;
-    @Column(name = "confirmacion_tarjeta")
     private Integer confimacionTarjeta;
     @Enumerated(EnumType.STRING)
     private Estado estadoPago;
+    private Integer Telefono;
+    private Integer segundoTelefono;
+    private String Direccion;
+
 
     public Tarjeta() {
     }
 
-    public Tarjeta(String id, Cliente cliente, Integer numeroTarjeta, Integer confimacionTarjeta, Estado estadoPago) {
-        Id = id;
-        this.cliente = cliente;
-        this.numeroTarjeta = numeroTarjeta;
-        this.confimacionTarjeta = confimacionTarjeta;
+    public Tarjeta(String direccion, Integer segundoTelefono, Integer telefono, Estado estadoPago, Integer confimacionTarjeta, Integer numeroTarjeta, Integer id) {
+        Direccion = direccion;
+        this.segundoTelefono = segundoTelefono;
+        Telefono = telefono;
         this.estadoPago = estadoPago;
+        this.confimacionTarjeta = confimacionTarjeta;
+        this.numeroTarjeta = numeroTarjeta;
+        Id = id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         Id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public Integer getNumeroTarjeta() {
@@ -82,5 +77,29 @@ public class Tarjeta {
 
     public void setEstadoPago(Estado estadoPago) {
         this.estadoPago = estadoPago;
+    }
+
+    public Integer getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(Integer telefono) {
+        Telefono = telefono;
+    }
+
+    public Integer getSegundoTelefono() {
+        return segundoTelefono;
+    }
+
+    public void setSegundoTelefono(Integer segundoTelefono) {
+        this.segundoTelefono = segundoTelefono;
+    }
+
+    public String getDireccion() {
+        return Direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        Direccion = direccion;
     }
 }

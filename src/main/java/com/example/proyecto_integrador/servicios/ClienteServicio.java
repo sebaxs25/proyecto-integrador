@@ -46,7 +46,7 @@ public class ClienteServicio {
         try{
             Optional<Cliente>buscandoCliente =this.repositorio.findById(id);
             if (buscandoCliente.isPresent()){
-                buscandoCliente.get().setSegundoTelefono(datosNuevos.getSegundoTelefono());
+                buscandoCliente.get().setNombre(datosNuevos.getNombre());
                 return this.repositorio.save(buscandoCliente.get());
             }else {
                 throw new Exception(MensajeApi.ERROR_CLIEENTE_NO_ENCONTRADO.getMensaje());
